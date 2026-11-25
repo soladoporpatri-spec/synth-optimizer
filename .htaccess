@@ -1,0 +1,89 @@
+# ============================================================
+# Synth Optimizer: configuração para Hostinger (LiteSpeed/Apache)
+# Envie este arquivo junto com o site, na pasta public_html.
+# ============================================================
+
+Options -Indexes
+ServerSignature Off
+
+# ---------- HTTPS e endereço canônico (https://synthoptimizer.com) ----------
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# 1) Força HTTPS (também atrás de proxy/CDN)
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://synthoptimizer.com%{REQUEST_URI} [L,R=301]
+
+# 2) www -> sem www
+RewriteCond %{HTTP_HOST} ^www\.synthoptimizer\.com$ [NC]
+RewriteRule ^ https://synthoptimizer.com%{REQUEST_URI} [L,R=301]
+
+# 3) /index.html -> /  (evita conteúdo duplicado)
+RewriteCond %{THE_REQUEST} \s/(.*/)?index\.html[\s?] [NC]
+RewriteRule ^(.*/)?index\.html$ /$1 [L,R=301]
+</IfModule>
+
+# ---------- Página de erro personalizada ----------
+ErrorDocument 404 /404.html
+
+# ---------- Tipos de arquivo ----------
+<IfModule mod_mime.c>
+AddType application/manifest+json .webmanifest
+AddType image/webp .webp
+AddDefaultCharset UTF-8
+</IfModule>
+
+# ---------- Compressão ----------
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+AddOutputFilterByType DEFLATE application/javascript text/javascript application/json
+AddOutputFilterByType DEFLATE application/manifest+json application/xml image/svg+xml
+</IfModule>
+
+# ---------- Cache do navegador ----------
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault "access plus 1 week"
+# HTML sempre revalidado, para publicar mudanças sem esperar
+ExpiresByType text/html "access plus 0 seconds"
+# CSS/JS: 1 semana (os nomes dos arquivos não mudam a cada publicação)
+ExpiresByType text/css "access plus 1 week"
+ExpiresByType application/javascript "access plus 1 week"
+ExpiresByType text/javascript "access plus 1 week"
+# Imagens e ícones
+ExpiresByType image/webp "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/svg+xml "access plus 1 year"
+# Favicon: cache curto (1 semana) para que uma troca de ícone apareça logo
+ExpiresByType image/x-icon "access plus 1 week"
+ExpiresByType image/vnd.microsoft.icon "access plus 1 week"
+ExpiresByType application/manifest+json "access plus 1 week"
+</IfModule>
+
+# ---------- Cabeçalhos de segurança ----------
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+Header always set Strict-Transport-Security "max-age=15552000"
+Header unset X-Powered-By
+
+<FilesMatch "\.(html)$">
+Header set Cache-Control "no-cache, must-revalidate"
+</FilesMatch>
+<FilesMatch "\.(webp|png|jpe?g|svg)$">
+Header set Cache-Control "public, max-age=31536000"
+</FilesMatch>
+<FilesMatch "\.ico$">
+Header set Cache-Control "public, max-age=604800"
+</FilesMatch>
+</IfModule>
+
+# ---------- Bloqueia arquivos que não devem ser públicos ----------
+<FilesMatch "(^\.|\.(zip|bak|md|log|sql|ini|py|ps1|sh)$)">
+Require all denied
+</FilesMatch>
+# O arquivo de verificação do IndexNow precisa continuar público (é .txt, não é bloqueado)

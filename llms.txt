@@ -1,0 +1,26 @@
+# Synth Optimizer
+
+> Remote gaming PC and console optimization. We boost FPS, cut input lag and stutter, and stabilize the system through a live remote session (about 30 minutes to 1 hour), with the customer watching the screen. Service languages: Portuguese, English and Spanish.
+
+Synth Optimizer is a service based in Brazil that serves customers worldwide, remotely. The optimization covers CPU, GPU and RAM tuning, Windows and BIOS adjustments, input lag reduction, network/ping optimization and game configuration. Personal files are not deleted. If a problem results from the service, the adjustments are redone at no extra cost, provided the request is made within 10 days of purchase. There are no refunds once the session has started.
+
+## Pages
+- [Home (English)](https://synthoptimizer.com/en/): services, plans, how it works, results and FAQ
+- [Home (English, UK)](https://synthoptimizer.com/en-gb/): same content with prices in pounds sterling
+- [Home (Español)](https://synthoptimizer.com/es/): servicios, planes, cómo funciona, resultados y preguntas frecuentes
+- [Home (Português)](https://synthoptimizer.com/): serviços, planos, como funciona, resultados e dúvidas
+- [Terms of use](https://synthoptimizer.com/en/terms/)
+- [Privacy policy and cookies](https://synthoptimizer.com/en/privacy/)
+
+## Plans
+- Console Plan: optimization for console players, including network and controller setup
+- PRO Plan: Windows, CPU/GPU and input lag optimization for gaming PCs
+- ELITE Plan: deeper optimization with safe overclocking, advanced BIOS tuning, network/ping optimization and game-specific configuration
+
+Prices (Console / PRO / ELITE): BRL 20 / 40 / 80 on the Portuguese site; USD 10 / 15 / 25 on the English (US) site; GBP 10 / 15 / 25 on the English (UK) site; EUR 10 / 15 / 25 on the Spanish site.
+
+## Official profiles
+- Instagram: https://www.instagram.com/synth_optimizer/
+- TikTok: https://www.tiktok.com/@synth.optimizer
+- Discord: https://discord.gg/G9Kv8VXPEC
+- WhatsApp: https://wa.me/5562994488816
